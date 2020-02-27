@@ -1,0 +1,10 @@
+.forecastItemCont{
+    margin: 2rem;
+    border-radius: 3px;
+}
+
+.forecastItemCont h2 {
+background-color: #fff;
+padding: 5px;
+margin: 0;
+}

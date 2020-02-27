@@ -1,0 +1,23 @@
+.forecastExtendedCont{
+    margin:50px auto;
+    position: relative;
+    height: 100vh;
+    max-height: 600px;
+    width: 100%;
+    background: rgba(240, 240, 240, .5);
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+  .forecastExtendedCont h1 {
+    text-align: center;
+    padding: 1rem;
+    color: #888;
+    font-weight: bold;
+    background: white;
+    position:relative;
+
+  }
+  .circularProgresCont{
+    margin: 100px auto;
+  }
