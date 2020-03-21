@@ -3,10 +3,10 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { Fab } from "@material-ui/core";
 
 
-export default function WeatherListController() {
+export default function WeatherListController(props) {
 
   const clickHandler = () => {
-      console.log("click")
+      props.showModal()
   };
   return (
     <div className="">
