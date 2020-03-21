@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
-//components
-import Weather from '../index.js';
-//css
-import './style.css';
+import React, { Component } from "react";
+import WeatherItem from "../weatherItem/weatherItem";
+import WeatherListController from "../weatherListController/weatherListController";
+
 export default class WeatherList extends Component {
   
-   handleWeatherLocationClick = city =>{
-     this.props.selectCity(city);
-   }
-  
+
   render() {
-    
-    const forComponent = (cities) => {
-     return cities.map( city =>(
-     <Weather key={city} city={city} onWeatherLocationClick={ () => this.handleWeatherLocationClick(city) }/>
-     ));
-  };
-    const {cities}=this.props;
+    const { cities } = this.props;
     return (
-      <div className="locationList">{forComponent(cities)}></div>
-      
-    )
+      <div className="weatherList">
+        {cities.map(city => (
+          <WeatherItem
+            key={city}
+            city={city}
+            click={() => this.props.selectCity(city)}
+          />
+        ))}
+        <WeatherListController showModal ={this.props.showModal} />
+      </div>
+    );
   }
 }
