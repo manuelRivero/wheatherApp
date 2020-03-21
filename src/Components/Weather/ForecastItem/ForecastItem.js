@@ -2,26 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // components
 import WeatherData from '../WeatherData';
-// css
-import './style.css';
+import {Card, CardHeader, CardContent} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 
+const useStiles= makeStyles( theme => {
+  return ({root:{
+    margin:"1rem"
+  }})
+})
 
-export default class ForescastItem extends Component {
-  static propTypes = {
-      weekDay:PropTypes.string.isRequired,
-      hour:PropTypes.number.isRequired,
-      data:PropTypes.shape({
-        
-      }),
-  }
+export default ({weekDay, hour, data })=> {
+  const classes = useStiles();
 
-  render() {
-      const {weekDay, hour, data }=this.props;
     return (
-      <div className="forecastItemCont">
-          <h2>{weekDay} {hour}</h2>
-          <WeatherData data={data}></WeatherData>
-      </div>
+      <React.Fragment>
+          <Card className={classes.root}>
+            <CardHeader title={weekDay} subheader={hour} />
+            <CardContent>
+              <WeatherData data={data}></WeatherData>
+            </CardContent>
+            
+          </Card>
+      </React.Fragment> 
     )
-  }
+  
 }
