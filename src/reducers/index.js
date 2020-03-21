@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import {cities} from './cities.js';
-import {city} from './city.js';
+import {extendedForecastReducer} from './forecastExtendedReducer.js'
+import {cityReducer} from './cityReducer.js';
 
 export default combineReducers({
-    city, cities
+    cityReducer, extendedForecastReducer
 })
