@@ -40,7 +40,7 @@ export default class WeatherList extends Component {
         ))}
         <WeatherListController showModal ={this.props.showModal} />
       </div>
-      <WeatherAlert show={this.state.showModal} onSubmit={this.modalSubmit} onCancel={this.modalCancel} />
+      <WeatherAlert show={this.state.showModal} onSubmit={this.modalSubmit} onCancel={this.modalCancel} city={this.state.deleteItem} />
       </React.Fragment>
     );
   }
