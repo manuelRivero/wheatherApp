@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Data from "../WeatherData";
+//Router
+import {Link} from 'react-router-dom';
 // Services
 import {
   transformWeather,
@@ -48,7 +50,8 @@ export default class Weather extends Component <props, state> {
     const { city } = this.props;
     const { data } = this.state;
     return (
-      <div className="weatherItem" onClick={this.headleClick}>
+      
+        <Link to={`/weather/${city}/forecast`} >
         <Card style={{ marginBottom: "1.5rem" }}>
           <CardHeader
             title={city}
@@ -62,7 +65,7 @@ export default class Weather extends Component <props, state> {
             {data ? <Data data={data} /> : <p>cargando</p>}
           </CardContent>
         </Card>
-      </div>
+        </Link>
     );
   };
 }

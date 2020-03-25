@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+//router
+import {Route} from "react-router-dom";
 // redux
 import { connect } from "react-redux";
 import { setSelectedCity, setUserLocation, searchCity, showModal, hideModal, addCity, deleteCity } from "../actions";
+// ui
+import { Grid} from '@material-ui/core'
 // components
 import WeatherList from "../Components/Weather/WeatherList/WeatherList";
 import SearchModal from "../Components/modal/modal";
+import ForecastExtendedContainer from "../Containers/ForecastExtendedContainer"
 
 class ForecastListContainer extends Component {
  
@@ -23,19 +28,23 @@ class ForecastListContainer extends Component {
 
   render() {
     return (
-      <div>
+      <Grid item xs={12} >
         <WeatherList
           cities={this.props.cities}
           selectCity={this.handleSelectionLocation}
           showModal={this.props.onShowModal}
           deleteCity={this.props.onDeleteCity}
         />
+
+        <Route path={`/weather/:city/forecast`} >
+          <ForecastExtendedContainer/>
+        </Route>
         <SearchModal open={this.props.showModal} 
         searchCity={this.props.searchCity} 
         isLoading={this.props.isLoading}
         searchResults ={this.props.searchResults}
         addCity={this.props.addCity}/>
-      </div>
+      </Grid>
     );
   }
 }
