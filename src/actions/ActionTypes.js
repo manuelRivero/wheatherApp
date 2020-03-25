@@ -3,6 +3,7 @@ export const GET_CITIES = "GET_CITIES";
 export const SET_FORECAST_DATA = "SET_FORECAST_DATA";
 export const ADD_CITY = "ADD_CITY";
 export const SET_USER_LOCATION = "SET_USER_LOCATION";
+export const DELETE_CITY ="DELETE_CITY"
 
 // for city search
 export const SHOW_SEARCH_MODAL ="SHOW_SEARCH_MODAL";

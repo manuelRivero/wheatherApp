@@ -10,8 +10,8 @@ export default class WeatherList extends Component {
     deleteItem:null
   }
   modalSubmit=()=>{
-    console.log("borrando" + " " + this.state.deleteItem);
     this.setState({showModal:false})
+    this.props.deleteCity(this.state.deleteItem)
   }
 
   modalCancel=()=>{
@@ -20,7 +20,7 @@ export default class WeatherList extends Component {
   }
 
   setDeleteItem=(index)=>{
-    this.setState({deleteItem:this.props.cities[index], showModal:true})
+    this.setState({deleteItem:index, showModal:true})
   }
   
 

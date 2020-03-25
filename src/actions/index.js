@@ -9,7 +9,8 @@ import {
   SEARCH_CITY_SUCCESS,
   SEARCH_CITY_FAIL,
   HIDE_SEARCH_MODAL,
-  SHOW_SEARCH_MODAL
+  SHOW_SEARCH_MODAL,
+  DELETE_CITY
 } from "./ActionTypes";
 const setCity = payload => ({ type: SET_CITY, payload });
 const setForecastData = payload => ({ type: SET_FORECAST_DATA, payload });
@@ -99,3 +100,10 @@ export const hideModal = () => {
     type: HIDE_SEARCH_MODAL
   };
 };
+
+export const deleteCity = (city) => {
+  return{
+    type:DELETE_CITY,
+    payload:city
+  }
+}
