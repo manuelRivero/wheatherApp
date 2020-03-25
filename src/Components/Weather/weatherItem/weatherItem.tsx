@@ -8,16 +8,28 @@ import {
 import CancelIcon from '@material-ui/icons/Cancel';
 import { Card, CardContent, CardHeader, IconButton } from "@material-ui/core";
 
-export default class Weather extends Component {
-  constructor() {
-    super();
+
+type props ={
+  city:string,
+  click: ()=> void,
+  onDelete: ()=> void,
+}
+
+type state = {
+  data:any
+}
+
+export default class Weather extends Component <props, state> {
+  constructor(props) {
+    super(props);
     this.state = {
-      data: null
-    };
+    data: null
+  };
   }
+  
 
   headleClick = city => {
-    this.props.click(city);
+    this.props.click();
   };
 
   onDelete = e => {
