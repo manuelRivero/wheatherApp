@@ -43,9 +43,9 @@ export const setUserLocation = () => {
     fetch(locationUrl)
       .then(res => res.json())
       .then(
-        ({ city, coutry_code}) => {
+        ({ city, country_name}) => {
           // set city in correct format for wheather api ej ( " rosario , ar ")
-          let formatedCityInfo = [city, coutry_code].join(",");
+          let formatedCityInfo = [city, country_name].join(", ");
           dispatch(addCity(formatedCityInfo));
           dispatch(setSelectedCity(formatedCityInfo));
         }
@@ -76,9 +76,18 @@ export const searchCity = city => {
   return dispatch => {
     dispatch(searchCityStart());
     findCity(city)
-      .then(({ data }) => {
-        let formatedCitiesList = data.map(
-          city => city.name + "," + city.country
+      .then(({_embedded}) => {
+        const cities = _embedded['city:search-results'];
+        console.log(cities)
+        let formatedCitiesList = cities.map( city => {
+          // city name is the firts element on the array
+          let cityNameArray = city.matching_full_name.split(",")
+          let cityName= cityNameArray[0]
+          // remove parentesis from the last statement
+          let country = cityNameArray[cityNameArray.length - 1].split("(")[0]
+          let formatedName = cityName+","+country;
+          return formatedName
+        }
         );
         console.log(formatedCitiesList);
         dispatch(searchCitySuccess(formatedCitiesList));
