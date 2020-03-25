@@ -38,16 +38,14 @@ export const addCity = city => {
   };
 };
 export const setUserLocation = () => {
-  let locationUrl = "http://www.geoplugin.net/json.gp";
+  let locationUrl = "https://ipapi.co/json/";
   return dispatch => {
     fetch(locationUrl)
       .then(res => res.json())
       .then(
-        ({ geoplugin_city, geoplugin_regionName, geoplugin_currencyCode }) => {
+        ({ city, coutry_code}) => {
           // set city in correct format for wheather api ej ( " rosario , ar ")
-          let formatedCityInfo = [geoplugin_city, geoplugin_currencyCode].join(
-            ","
-          );
+          let formatedCityInfo = [city, coutry_code].join(",");
           dispatch(addCity(formatedCityInfo));
           dispatch(setSelectedCity(formatedCityInfo));
         }
