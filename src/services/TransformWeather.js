@@ -3,7 +3,7 @@ import moment from 'moment';
  // fetch from API
 export const getData = (city, type="weather") => {
 const apiKey = "ea0b23131c72bacfe9c361211bb6ea7f";
-const api_weather = `http://api.openweathermap.org/data/2.5/${type}?q=${city}&units=metric&APPID=${apiKey}`;
+const api_weather = `https://api.openweathermap.org/data/2.5/${type}?q=${city}&units=metric&APPID=${apiKey}`;
    return fetch(api_weather)
     .then( res => {
        return res.json();
