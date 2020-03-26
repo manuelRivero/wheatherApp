@@ -1,47 +1,64 @@
 import React, { Component } from "react";
 import WeatherItem from "../weatherItem/weatherItem.tsx";
-import WeatherAlert from "../weatherAlert/weatherAlert.tsx"
+import WeatherAlert from "../weatherAlert/weatherAlert.tsx";
 import WeatherListController from "../weatherListController/weatherListController";
+import { Grid, Paper } from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
 
-export default class WeatherList extends Component {
-  
-  state={
-    showModal:false,
-    deleteItem:null
-  }
-  modalSubmit=()=>{
-    this.setState({showModal:false})
-    this.props.deleteCity(this.state.deleteItem)
-  }
+const styles = theme => {
+  return {
+    paper: {
+      padding: "1rem",
+      textAlign: "center"
+    }
+  };
+};
+class WeatherList extends Component {
+  state = {
+    showModal: false,
+    deleteItem: null
+  };
+  modalSubmit = () => {
+    this.setState({ showModal: false });
+    this.props.deleteCity(this.state.deleteItem);
+  };
 
-  modalCancel=()=>{
-    console.log("cancelado")
-    this.setState({showModal:false, deleteItem:false})
-  }
+  modalCancel = () => {
+    console.log("cancelado");
+    this.setState({ showModal: false, deleteItem: false });
+  };
 
-  setDeleteItem=(index)=>{
-    this.setState({deleteItem:index, showModal:true})
-  }
-  
+  setDeleteItem = index => {
+    this.setState({ deleteItem: index, showModal: true });
+  };
 
   render() {
-    const { cities } = this.props;
+    const { cities, classes } = this.props;
     return (
       <React.Fragment>
-        
-      <div className="weatherList">
-        {cities.map((city, index) => (
-          <WeatherItem
-            key={city + index}
-            city={city}
-            click={() => this.props.selectCity(city)}
-            onDelete={()=> this.setDeleteItem(index)}
-          />
-        ))}
-        <WeatherListController showModal ={this.props.showModal} />
-      </div>
-      <WeatherAlert show={this.state.showModal} onSubmit={this.modalSubmit} onCancel={this.modalCancel} city={this.state.deleteItem} />
+        <Grid item xs={12} md={6}>
+          <Paper className={classes.paper}>
+            {cities.map((city, index) => (
+              <WeatherItem
+                key={city + index}
+                city={city}
+                click={() => this.props.selectCity(city)}
+                onDelete={() => this.setDeleteItem(index)}
+              />
+            ))}
+            <WeatherListController showModal={this.props.showModal} />
+          </Paper>
+        </Grid>
+
+        <WeatherAlert
+          show={this.state.showModal}
+          onSubmit={this.modalSubmit}
+          onCancel={this.modalCancel}
+          city={this.state.deleteItem}
+        />
       </React.Fragment>
     );
   }
 }
+
+export default withStyles(styles)(WeatherList);
