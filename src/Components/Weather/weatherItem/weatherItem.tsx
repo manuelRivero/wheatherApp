@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Data from "../WeatherData";
 //Router
-import {Link} from 'react-router-dom';
+import {withRouter ,RouteComponentProps} from 'react-router-dom'
 // Services
 import {
   transformWeather,
@@ -10,18 +10,16 @@ import {
 import CancelIcon from '@material-ui/icons/Cancel';
 import { Card, CardContent, CardHeader, IconButton } from "@material-ui/core";
 
-
-type props ={
+interface props extends RouteComponentProps{
   city:string,
-  click: ()=> void,
-  onDelete: ()=> void,
+  onDelete: ()=>void
 }
 
-type state = {
+type state= {
   data:any
 }
 
-export default class Weather extends Component <props, state> {
+class Weather extends Component<props, state> {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,8 +28,10 @@ export default class Weather extends Component <props, state> {
   }
   
 
-  headleClick = city => {
-    this.props.click();
+  headleClick =  () => {
+
+    let path = `/weather/${this.props.city}/forecast`;
+    console.log(this.props.history.replace(path))
   };
 
   onDelete = e => {
@@ -50,9 +50,7 @@ export default class Weather extends Component <props, state> {
     const { city } = this.props;
     const { data } = this.state;
     return (
-      
-        <Link to={`/weather/${city}/forecast`} >
-        <Card style={{ marginBottom: "1.5rem" }}>
+        <Card style={{ marginBottom: "1.5rem" }} onClick={this.headleClick}>
           <CardHeader
             title={city}
             action={
@@ -65,7 +63,8 @@ export default class Weather extends Component <props, state> {
             {data ? <Data data={data} /> : <p>cargando</p>}
           </CardContent>
         </Card>
-        </Link>
     );
   };
 }
+
+export default withRouter(Weather )

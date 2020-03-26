@@ -42,7 +42,6 @@ class WeatherList extends Component {
               <WeatherItem
                 key={city + index}
                 city={city}
-                click={() => this.props.selectCity(city)}
                 onDelete={() => this.setDeleteItem(index)}
               />
             ))}
