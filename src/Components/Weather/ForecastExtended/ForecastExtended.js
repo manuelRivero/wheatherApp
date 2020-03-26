@@ -1,9 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ForescastItem from "../ForecastItem/ForecastItem";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Grid, Paper } from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles( theme => {
+  return ({
+    paper:{
+      padding:'1rem',
+      textAlign: "center"
+    }
+  })
+})
 
 const ForecastExtended = ({ city, forecastExtendedData }) => {
+
+  const classes=useStyles();
   let forecast = <CircularProgress />;
 
   if (forecastExtendedData && forecastExtendedData[city]) {
@@ -18,10 +30,12 @@ const ForecastExtended = ({ city, forecastExtendedData }) => {
   }
 
   return (
-    <div className="forecastExtendedCont">
-      {city && <h1>{city}</h1>}
+    <Grid item sm={12} md={6}>
+      <Paper className={classes.paper}>
+        {city && <h1>{city}</h1>}
       {forecast}
-    </div>
+      </Paper>
+    </Grid>
   );
 };
 ForecastExtended.propTypes = {

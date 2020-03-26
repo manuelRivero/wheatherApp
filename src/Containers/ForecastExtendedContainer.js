@@ -10,13 +10,13 @@ class ForecastExtendedContainer extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         {this.props.city ? (
           <ForecastExtended city={this.props.city} forecastExtendedData={this.props.forecastExtendedData}/>
         ) : (
           <h1>no se selecciono ninguna ciudad</h1>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }
