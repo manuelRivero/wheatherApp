@@ -15,16 +15,12 @@ import {
 const setCity = payload => ({ type: SET_CITY, payload });
 const setForecastData = payload => ({ type: SET_FORECAST_DATA, payload });
 
-export const setSelectedCity = payload => {
+export const getForecastData = payload => {
   return dispatch => {
-    //activar indicador de busqueda
-    dispatch(setCity(payload));
     getData(payload, "forecast")
       .then(forecastData => {
         //modificar el estado con el resultado del fecht
-        console.log(forecastData);
         const forecastExtend = transformForecastExtend(forecastData);
-        console.log(forecastExtend);
         dispatch(setForecastData({ city: payload, forecastExtend }));
       })
       .catch(err => console.log(`${err}`));
@@ -47,7 +43,7 @@ export const setUserLocation = () => {
           // set city in correct format for wheather api ej ( " rosario , ar ")
           let formatedCityInfo = [city, country_name].join(", ");
           dispatch(addCity(formatedCityInfo));
-          dispatch(setSelectedCity(formatedCityInfo));
+          dispatch(getForecastData(formatedCityInfo));
         }
       );
   };
@@ -78,7 +74,6 @@ export const searchCity = city => {
     findCity(city)
       .then(({_embedded}) => {
         const cities = _embedded['city:search-results'];
-        console.log(cities)
         let formatedCitiesList = cities.map( city => {
           // city name is the firts element on the array
           let cityNameArray = city.matching_full_name.split(",")
@@ -89,7 +84,6 @@ export const searchCity = city => {
           return formatedName
         }
         );
-        console.log(formatedCitiesList);
         dispatch(searchCitySuccess(formatedCitiesList));
       })
       .catch(err => dispatch(searchCityfail(err)));

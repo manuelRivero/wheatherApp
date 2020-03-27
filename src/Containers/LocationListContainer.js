@@ -34,7 +34,6 @@ class ForecastListContainer extends Component {
       <React.Fragment>
         <WeatherList
           cities={this.props.cities}
-          selectCity={this.handleSelectionLocation}
           showModal={this.props.onShowModal}
           deleteCity={this.props.onDeleteCity}
         />
@@ -55,7 +54,6 @@ ForecastListContainer.propsType = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  dispatchsetCity: city => dispatch(setSelectedCity(city)),
   setUserLocation: () => dispatch(setUserLocation()),
   searchCity: criterio => dispatch(searchCity(criterio)),
   onShowModal: () => dispatch(showModal()),

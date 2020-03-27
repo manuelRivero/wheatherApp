@@ -13,13 +13,13 @@ const useStyles = makeStyles( theme => {
   })
 })
 
-const ForecastExtended = ({ city, forecastExtendedData }) => {
+const ForecastExtended = ({ city,forecastExtendedData }) => {
 
   const classes=useStyles();
   let forecast = <CircularProgress />;
 
-  if (forecastExtendedData && forecastExtendedData[city]) {
-    forecast = forecastExtendedData[city].map((day, index) => (
+  if (forecastExtendedData && forecastExtendedData[0] === city ) {
+    forecast = forecastExtendedData[1].map((day, index) => (
       <ForescastItem
         weekDay={day.weekDay}
         hour={day.hour}
@@ -32,14 +32,11 @@ const ForecastExtended = ({ city, forecastExtendedData }) => {
   return (
     <Grid item sm={12} md={6}>
       <Paper className={classes.paper}>
-        {city && <h1>{city}</h1>}
+        <h1>{city}</h1>
       {forecast}
       </Paper>
     </Grid>
   );
-};
-ForecastExtended.propTypes = {
-  city: PropTypes.string.isRequired
 };
 
 export default ForecastExtended;
