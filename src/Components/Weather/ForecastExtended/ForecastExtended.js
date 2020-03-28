@@ -20,9 +20,7 @@ const useStyles = makeStyles(theme => {
       textAlign: "center"
     },
     expansionPanelDetail:{
-      flexDirection:'column',
-      maxHeight:'200px',
-      overflow:'scroll'
+      flexDirection:'column'
     }
   };
 });

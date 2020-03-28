@@ -17,7 +17,7 @@ export default ({weekDay, hour, data })=> {
     return (
       <React.Fragment>
           <Card className={classes.root}>
-            <CardHeader title={weekDay} subheader={`${hour}:00`} />
+            <CardHeader title={`${hour}:00`} />
             <CardContent>
               <WeatherData data={data}></WeatherData>
             </CardContent>
