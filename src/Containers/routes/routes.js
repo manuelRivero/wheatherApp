@@ -1,14 +1,14 @@
 import React from "react";
-import { Route, Redirect} from "react-router-dom";
+import { Route, Redirect, Switch} from "react-router-dom";
 
 import ForecastRoutes from "./forecastRoutes";
-import LocationListContainer from "./../LocationListContainer"
+import LocationListContainer from "./../LocationListContainer";
 import UserRoutes from "./userRoutes";
 
 export default function Routes(props) {
   let routes = (
-    <React.Fragment>
-      <Route path="/weather">
+    <Switch>
+      <Route path="/weather" exact>
         <LocationListContainer />
       </Route>
 
@@ -17,11 +17,7 @@ export default function Routes(props) {
 
       {/* Dinamic Routes for User*/}
       <UserRoutes />
-
-      <Route path="/" >
-        <Redirect from="/" to="/weather" />
-      </Route>
-    </React.Fragment>
+    </Switch>
   );
   if (props.isAuth) {
     routes = (
@@ -44,5 +40,5 @@ export default function Routes(props) {
     );
   }
 
-  return (routes);
+  return routes;
 }

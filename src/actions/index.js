@@ -17,6 +17,7 @@ const setForecastData = payload => ({ type: SET_FORECAST_DATA, payload });
 
 export const getForecastData = payload => {
   return dispatch => {
+    console.log(payload)
     getData(payload, "forecast")
       .then(forecastData => {
         //modificar el estado con el resultado del fecht
