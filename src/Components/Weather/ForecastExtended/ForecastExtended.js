@@ -1,6 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ForescastItem from "../ForecastItem/ForecastItem";
+import {useHistory} from "react-router-dom"
 import {
   CircularProgress,
   Grid,
@@ -8,9 +10,9 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  Typography
+  Typography,
+  IconButton
 } from "@material-ui/core";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => {
@@ -19,18 +21,25 @@ const useStyles = makeStyles(theme => {
       padding: "1rem",
       textAlign: "center"
     },
-    expansionPanelDetail:{
-      flexDirection:'column'
+    expansionPanelDetail: {
+      flexDirection: "column"
+    },
+    actions:{
+      textAlign:"left"
     }
   };
 });
 
 const ForecastExtended = ({ city, forecastExtendedData }) => {
   const classes = useStyles();
+  let history = useHistory();
   let forecast = <CircularProgress />;
 
-  if (forecastExtendedData && forecastExtendedData[0] === city) {
+  const onBack = () => {
+    history.push("/weather")
+  };
 
+  if (forecastExtendedData && forecastExtendedData[0] === city) {
     // it's an object
     let forecastGroups = forecastExtendedData[1].reduce((weekDay, a) => {
       weekDay[a.weekDay] = [...(weekDay[a.weekDay] || []), a];
@@ -38,50 +47,53 @@ const ForecastExtended = ({ city, forecastExtendedData }) => {
     }, {});
 
     // converting into an array of groups objects
-    let groupArray=[]
-    for(let group in forecastGroups){
-      groupArray.push({[group]:forecastGroups[group]})
-    } 
+    let groupArray = [];
+    for (let group in forecastGroups) {
+      groupArray.push({ [group]: forecastGroups[group] });
+    }
 
-    forecast= groupArray.map((dayGroup, groupIndex) => {
+    forecast = groupArray.map((dayGroup, groupIndex) => {
       let dayGroupName;
-      for(let name in dayGroup){
-        dayGroupName=name
+      for (let name in dayGroup) {
+        dayGroupName = name;
       }
       return (
         <ExpansionPanel key={dayGroupName + groupIndex}>
-            <ExpansionPanelSummary
-              key={dayGroupName+groupIndex}
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls={dayGroupName}
-              id={dayGroupName}
-            >
-                <Typography>{dayGroupName}</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails className={classes.expansionPanelDetail}>
-              {dayGroup[dayGroupName].map( (day, index)=>{
-                return(
-                  <ForescastItem
+          <ExpansionPanelSummary
+            key={dayGroupName + groupIndex}
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls={dayGroupName}
+            id={dayGroupName}
+          >
+            <Typography>{dayGroupName}</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails className={classes.expansionPanelDetail}>
+            {dayGroup[dayGroupName].map((day, index) => {
+              return (
+                <ForescastItem
                   weekDay={day.weekDay}
                   hour={day.hour}
                   data={day.data}
-                  key={day+index}
+                  key={day + index}
                 ></ForescastItem>
-                )
-              })}
-            </ExpansionPanelDetails>
+              );
+            })}
+          </ExpansionPanelDetails>
         </ExpansionPanel>
-        )
+      );
     });
-   }
+  }
 
   return (
     <Grid item sm={12} md={6}>
       <Paper className={classes.paper}>
+        <div className={classes.actions}>
+          <IconButton onClick={onBack}>
+            <ArrowBackIcon />
+          </IconButton>
+        </div>
         <h1>{city}</h1>
-        {forecast && 
-          forecast
-          }
+        {forecast && forecast}
       </Paper>
     </Grid>
   );
