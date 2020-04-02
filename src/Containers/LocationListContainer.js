@@ -26,7 +26,9 @@ class ForecastListContainer extends Component {
   };
 
   componentDidMount() {
-    this.props.setUserLocation();
+    if(this.props.cities.length < 1 ){
+      this.props.setUserLocation();
+    }
   }
 
   render() {
