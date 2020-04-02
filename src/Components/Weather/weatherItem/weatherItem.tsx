@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader, IconButton } from "@material-ui/core";
 
 interface props extends RouteComponentProps{
   city:string,
-  onDelete: ()=>void
+  onDelete: ()=>void | null
 }
 
 type state= {
@@ -30,7 +30,7 @@ class Weather extends Component<props, state> {
 
   headleClick =  () => {
 
-    let path = `/weather/${this.props.city}/forecast`;
+    let path = `/weather/forecast/${this.props.city}`;
     console.log(this.props.history.replace(path))
   };
 
@@ -53,7 +53,7 @@ class Weather extends Component<props, state> {
         <Card style={{ marginBottom: "1.5rem" }} onClick={this.headleClick}>
           <CardHeader
             title={city}
-            action={
+            action={ this.props.onDelete &&
               <IconButton aria-label="settings" onClick={this.onDelete}>
                 <CancelIcon color="secondary" />
               </IconButton>

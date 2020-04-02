@@ -42,7 +42,7 @@ class WeatherList extends Component {
               <WeatherItem
                 key={city + index}
                 city={city}
-                onDelete={() => this.setDeleteItem(index)}
+                onDelete={index > 0 ? () => this.setDeleteItem(index) : null}
               />
             ))}
             <WeatherListController showModal={this.props.showModal} />
