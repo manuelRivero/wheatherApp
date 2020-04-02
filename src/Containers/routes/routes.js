@@ -1,22 +1,45 @@
 import React from "react";
-import { Route, Redirect, Switch} from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 
 import ForecastRoutes from "./forecastRoutes";
 import LocationListContainer from "./../LocationListContainer";
 import UserRoutes from "./userRoutes";
 
-export default function Routes(props) {
-  let routes = (
-    <Switch>
+const WeatherRoutes = () => {
+  return (
+    <React.Fragment>
       <Route path="/weather" exact>
         <LocationListContainer />
       </Route>
+    </React.Fragment>
+  );
+};
 
-      {/* Dinamic Routes for Forecast Extended */}
-      <ForecastRoutes />
+const NotFound = () => {
+  return <h1>not found</h1>;
+};
 
-      {/* Dinamic Routes for User*/}
-      <UserRoutes />
+export default function Routes(props) {
+  let routes = (
+    <Switch>
+      <Route path="/" exact>
+        <Redirect to="/weather" />
+      </Route>
+      <Route path="/weather">
+        <WeatherRoutes />
+      </Route>
+
+      <Route path="/forecast">
+        <ForecastRoutes />
+      </Route>
+
+      <Route path="/user">
+        <UserRoutes />
+      </Route>
+
+      <Route path="*">
+        <NotFound />
+      </Route>
     </Switch>
   );
   if (props.isAuth) {

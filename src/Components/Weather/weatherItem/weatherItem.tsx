@@ -30,7 +30,7 @@ class Weather extends Component<props, state> {
 
   headleClick =  () => {
 
-    let path = `/weather/forecast/${this.props.city}`;
+    let path = `/forecast/${this.props.city}`;
     console.log(this.props.history.replace(path))
   };
 
