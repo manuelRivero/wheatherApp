@@ -23,7 +23,7 @@ export const cityReducer = (state = initialState, action) => {
       return { ...state, selectedCity: action.payload };
     case ADD_CITY:
       let newCitiesList = [...state.cities, action.payload];
-      return { ...state, cities: newCitiesList, showModal:false };
+      return { ...state, cities: newCitiesList};
     case SEARCH_CITY_START:
       return { ...state, isLoading: true };
     case SEARCH_CITY_FAIL:

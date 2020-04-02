@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 //router
+import {withRouter} from "react-router"
 // redux
 import { connect } from "react-redux";
 import {
@@ -29,9 +30,15 @@ class ForecastListContainer extends Component {
     if(this.props.cities.length < 1 ){
       this.props.setUserLocation();
     }
+    let query= new URLSearchParams(this.props.location.search).get("find")
+    if(query){
+      this.props.onShowModal()
+      this.props.searchCity(query)
+    }
   }
 
   render() {
+    let query= new URLSearchParams(this.props.location.search).get("find")
     return (
       <React.Fragment>
         <WeatherList
@@ -45,6 +52,8 @@ class ForecastListContainer extends Component {
           isLoading={this.props.isLoading}
           searchResults={this.props.searchResults}
           addCity={this.props.addCity}
+          hide={this.props.onHideModal}
+          findValue={query ? query : null}
         />
       </React.Fragment>
     );
@@ -74,4 +83,4 @@ const mapStateToProps = ({ cityReducer }) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ForecastListContainer);
+)(withRouter(ForecastListContainer))

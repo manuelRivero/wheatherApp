@@ -7,27 +7,41 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import AddIcon from '@material-ui/icons/Add';
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 
 //lista
-
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { CircularProgress, Fab } from "@material-ui/core/";
+import { CircularProgress } from "@material-ui/core/";
+import { makeStyles } from "@material-ui/core/styles";
 
 // redux
 
-import * as actions from "./../../actions/index";
+
+const useStyles = makeStyles( theme => {
+  return ({
+    root:{
+      textAlign:"center"
+    },
+    spinner:{
+      padding:"1rem",
+      margin:"1rem"
+    }
+  })
+})
 
 export default function SearchModal(props) {
+
+  const classes = useStyles()
   const handleClose = () => {
-    console.log("close");
+    if(props.findValue){
+      window.history.pushState("", "","/weather")
+    }
+    props.hide()
   };
   const inputChangedHanler = event => {
     let value = event.target.value;
@@ -39,17 +53,23 @@ export default function SearchModal(props) {
     }, 200);
   };
 
+
   const clickHandler = (index) => {
     props.addCity(props.searchResults[index])
+    props.hide()
   }
+  
   return (
+    
     <>
-    {console.log(props.searchResults)}
-      <Dialog open={props.open} aria-labelledby="form-dialog-title">
+    
+      <Dialog open={props.open} aria-labelledby="form-dialog-title" className={classes.root}>
         <DialogTitle id="form-dialog-title">New location</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
+            defaultValue={props.findValue ? props.findValue : ""}
+            placeholder	=" ej. Buenos Aires"
             margin="dense"
             id="city"
             label="find"
@@ -57,7 +77,7 @@ export default function SearchModal(props) {
             onChange={inputChangedHanler}
             fullWidth
           />
-          {props.isLoading && <CircularProgress />}
+          {props.isLoading && <CircularProgress className={classes.spinner} />}
           {props.searchResults && (
             <List component="nav" aria-label="main mailbox folders">
               {props.searchResults.map((result, index) => {
@@ -77,10 +97,6 @@ export default function SearchModal(props) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-
-          <Fab color="primary" onClick={handleClose} aria-label="add">
-            <AddIcon />
-          </Fab>
         </DialogActions>
       </Dialog>
     </>

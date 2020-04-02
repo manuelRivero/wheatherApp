@@ -31,6 +31,16 @@ export default function forecastPlaceholder() {
 
   let placeHolder = <Redirect to="weather"/>
 
+  
+  const onFind = () => {
+    console.log("click")
+    history.push(`/weather?find=${query}`);
+  };
+
+  const onBack = () => {
+    history.push("/weather");
+  };
+
 
   if (query) {
     placeHolder = (
@@ -41,13 +51,6 @@ export default function forecastPlaceholder() {
     );
   }
 
-  const onFind = () => {
-    history.push(`/weather?find=${query}`);
-  };
-
-  const onBack = () => {
-    history.push("/weather");
-  };
   return (
     <Grid item sm={12} md={8}>
       <Paper className={classes.root}>
