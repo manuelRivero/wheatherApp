@@ -11,18 +11,15 @@ class ForecastExtendedContainer extends Component {
   };
 
   componentDidMount(){
-    let city = this.props.match.params.city;
-  }
+    let city = this.props.city;
 
-  shouldComponentUpdate(nextProps, nextState){
-    console.log("update")
-    return true
+    this.props.getForecast(city)
 
   }
   componentDidUpdate(){
-    if(this.props.forecastExtendedData[0] !== this.props.match.params.city){
+    if(this.props.forecastExtendedData[0] !== this.props.city){
       
-    let city = this.props.match.params.city;
+    let city = this.props.city;
     this.props.getForecast(city)
     }
     
