@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {withRouter, Route} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import { connect } from "react-redux";
 import ForecastExtended from "../Components/Weather/ForecastExtended/ForecastExtended";
 import * as actions from "../actions/index";
@@ -12,15 +12,20 @@ class ForecastExtendedContainer extends Component {
 
   componentDidMount(){
     let city = this.props.match.params.city;
-    this.props.getForecast(city)
+    let cityIndex =this.props.availableCities.indexOf(city)
+
+    if(cityIndex >= 0){
+      this.props.getForecast(city)
+    }else{
+
+      this.props.history.replace(`/forecast?find=${city}`)
+    }
+    
 
   }
   componentDidUpdate(){
     
-    if( this.props.availableCities[this.props.match.params.city]){
-      console.log("ciudad no disponible")
-      return;
-    }
+    
     if(this.props.forecastExtendedData[0] !== this.props.match.params.city){
       console.log("deberia actualizar")
     let city = this.props.match.params.city;
