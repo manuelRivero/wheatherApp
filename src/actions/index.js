@@ -1,6 +1,7 @@
 import { getData, transformForecastExtend } from "../services/TransformWeather";
 import { findCity } from "../services/findCity";
-import {
+import firebaseApp from "../firebase/firebaseConfi"
+import  {
   SET_CITY,
   SET_FORECAST_DATA,
   ADD_CITY,
@@ -12,6 +13,7 @@ import {
   SHOW_SEARCH_MODAL,
   DELETE_CITY
 } from "./ActionTypes";
+import * as actions from "./ActionTypes";
 const setCity = payload => ({ type: SET_CITY, payload });
 const setForecastData = payload => ({ type: SET_FORECAST_DATA, payload });
 
@@ -69,6 +71,7 @@ const searchCitySuccess = cities => {
   };
 };
 
+
 export const searchCity = city => {
   return dispatch => {
     dispatch(searchCityStart());
@@ -107,5 +110,12 @@ export const deleteCity = (city) => {
   return{
     type:DELETE_CITY,
     payload:city
+  }
+}
+
+export const setAuthState = (user) => {
+  return {
+    type:actions.SET_AUTH_STATE,
+    payload:user
   }
 }
