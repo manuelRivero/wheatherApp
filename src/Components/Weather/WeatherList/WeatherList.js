@@ -53,7 +53,7 @@ class WeatherList extends Component {
           show={this.state.showModal}
           onSubmit={this.modalSubmit}
           onCancel={this.modalCancel}
-          city={this.state.deleteItem}
+          city={cities[this.state.deleteItem]}
         />
       </React.Fragment>
     );
