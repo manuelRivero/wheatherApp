@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => {
 export default props => {
   const classes = useStyles();
   return (
-    <Router>
+    <Router  basename="/wheatherApp" >
       <div className={classes.root}>
         <Header />
         <Container className={classes.container} maxWidth="md">
