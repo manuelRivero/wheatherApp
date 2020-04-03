@@ -50,7 +50,7 @@ class Weather extends Component<props, state> {
     const { city } = this.props;
     const { data } = this.state;
     return (
-        <Card style={{ marginBottom: "1.5rem" }} onClick={this.headleClick}>
+        <Card style={{ marginBottom: "1.5rem", cursor:'pointer' }} onClick={this.headleClick}>
           <CardHeader
             title={city}
             action={ this.props.onDelete &&
