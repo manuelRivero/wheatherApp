@@ -1,13 +1,13 @@
 {
-  "main.css": "/wheatherApp/static/css/main.56a62d3b.chunk.css",
-  "main.js": "/wheatherApp/static/js/main.b48d7689.chunk.js",
-  "main.js.map": "/wheatherApp/static/js/main.b48d7689.chunk.js.map",
-  "static/js/1.a5d76937.chunk.js": "/wheatherApp/static/js/1.a5d76937.chunk.js",
-  "static/js/1.a5d76937.chunk.js.map": "/wheatherApp/static/js/1.a5d76937.chunk.js.map",
+  "main.css": "/wheatherApp/static/css/main.cd3ce88a.chunk.css",
+  "main.js": "/wheatherApp/static/js/main.9a969566.chunk.js",
+  "main.js.map": "/wheatherApp/static/js/main.9a969566.chunk.js.map",
+  "static/js/1.27fe69dd.chunk.js": "/wheatherApp/static/js/1.27fe69dd.chunk.js",
+  "static/js/1.27fe69dd.chunk.js.map": "/wheatherApp/static/js/1.27fe69dd.chunk.js.map",
   "runtime~main.js": "/wheatherApp/static/js/runtime~main.412e618e.js",
   "runtime~main.js.map": "/wheatherApp/static/js/runtime~main.412e618e.js.map",
-  "static/css/main.56a62d3b.chunk.css.map": "/wheatherApp/static/css/main.56a62d3b.chunk.css.map",
+  "static/css/main.cd3ce88a.chunk.css.map": "/wheatherApp/static/css/main.cd3ce88a.chunk.css.map",
   "index.html": "/wheatherApp/index.html",
-  "precache-manifest.bedc56a4c5d8523ac15c576672e07612.js": "/wheatherApp/precache-manifest.bedc56a4c5d8523ac15c576672e07612.js",
+  "precache-manifest.7dca898ff1c2ca922631e7982e2b4130.js": "/wheatherApp/precache-manifest.7dca898ff1c2ca922631e7982e2b4130.js",
   "service-worker.js": "/wheatherApp/service-worker.js"
 }
