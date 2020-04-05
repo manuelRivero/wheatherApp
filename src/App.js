@@ -10,6 +10,7 @@ import Container from "@material-ui/core/Container";
 // Components
 import Header from "./Components/Header/Header";
 import "./App.css";
+import SnackbarContainer from "./Containers/snackbarContainer";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -31,6 +32,7 @@ export default (props) => {
         <Container className={classes.container} maxWidth="md">
           <Grid container direction="row" justify="center" alignItems="center">
             <Routes />
+            <SnackbarContainer />
           </Grid>
         </Container>
       </div>

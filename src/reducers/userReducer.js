@@ -16,7 +16,7 @@ export const userReducer = (state = initialState, action) => {
       return { ...state, snackbar: newSnackBar };
 
     case actions.HIDE_SNACKBAR:
-      let newSnackBar = { show: false, message:"" };
+       newSnackBar = { show: false, message:"" };
       return { ...state, snackbar: newSnackBar };
     default:
       return state;

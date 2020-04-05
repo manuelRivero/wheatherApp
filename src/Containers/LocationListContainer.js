@@ -4,26 +4,16 @@ import PropTypes from "prop-types";
 import {withRouter} from "react-router"
 // redux
 import { connect } from "react-redux";
-import {
-  setSelectedCity,
-  setUserLocation,
-  searchCity,
-  showModal,
-  hideModal,
-  addCity,
-  deleteCity
-} from "../actions";
+import * as actions from "../actions";
 // components
 import WeatherList from "../Components/Weather/WeatherList/WeatherList";
 import SearchModal from "../Components/modal/modal";
 
 class ForecastListContainer extends Component {
-  static propTypes = {
-    dispatchsetCity: PropTypes.func.isRequired
-  };
-
+  
   handleSelectionLocation = city => {
-    this.props.dispatchsetCity(city);
+    this.props.addCity(city);
+    this.props.showSnackbar(`New location added, ${city}`)
   };
 
   componentDidMount() {
@@ -51,7 +41,7 @@ class ForecastListContainer extends Component {
           searchCity={this.props.searchCity}
           isLoading={this.props.isLoading}
           searchResults={this.props.searchResults}
-          addCity={this.props.addCity}
+          addCity={this.handleSelectionLocation}
           hide={this.props.onHideModal}
           findValue={query ? query : null}
         />
@@ -65,12 +55,13 @@ ForecastListContainer.propsType = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setUserLocation: () => dispatch(setUserLocation()),
-  searchCity: criterio => dispatch(searchCity(criterio)),
-  onShowModal: () => dispatch(showModal()),
-  onHideModal: () => dispatch(hideModal()),
-  addCity: city => dispatch(addCity(city)),
-  onDeleteCity: city => dispatch(deleteCity(city))
+  setUserLocation: () => dispatch(actions.setUserLocation()),
+  searchCity: criterio => dispatch(actions.searchCity(criterio)),
+  onShowModal: () => dispatch(actions.showModal()),
+  onHideModal: () => dispatch(actions.hideModal()),
+  addCity: city => dispatch(actions.addCity(city)),
+  onDeleteCity: city => dispatch(actions.deleteCity(city)),
+  showSnackbar: (message)=> dispatch(actions.showSnackbar(message))
 });
 
 const mapStateToProps = ({ cityReducer }) => ({

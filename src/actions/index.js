@@ -46,6 +46,7 @@ export const setUserLocation = () => {
           // set city in correct format for wheather api ej ( " rosario , ar ")
           let formatedCityInfo = [city, country_name].join(", ");
           dispatch(addCity(formatedCityInfo));
+          dispatch(showSnackbar(`your current location, ${formatedCityInfo}`))
           dispatch(getForecastData(formatedCityInfo));
         }
       );
