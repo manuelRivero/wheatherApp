@@ -1,9 +1,14 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-
+import {connect} from "react-redux";
 import ForecastRoutes from "./forecastRoutes";
 import LocationListContainer from "./../LocationListContainer";
-import UserRoutes from "./userRoutes";
+
+import * as actions from "../../actions/index"
+
+//auth
+import firebaseApp from "./../../firebase/firebaseConfi";
+import UserContainer from "../userContainer";
 
 const WeatherRoutes = () => {
   return (
@@ -18,13 +23,20 @@ const WeatherRoutes = () => {
 const NotFound = () => {
   return <h1>not found</h1>;
 };
+function Routes({setAuthState}) {
+  
+  React.useEffect( ()=>{
+    firebaseApp.auth().onAuthStateChanged( (user)=> {
+      setAuthState(user)
+    })
+  },[])
 
-export default function Routes(props) {
   let routes = (
     <Switch>
       <Route path="/" exact>
         <Redirect to="/weather" />
       </Route>
+
       <Route path="/weather">
         <WeatherRoutes />
       </Route>
@@ -34,7 +46,7 @@ export default function Routes(props) {
       </Route>
 
       <Route path="/user">
-        <UserRoutes />
+        <UserContainer />
       </Route>
 
       <Route path="*">
@@ -42,26 +54,17 @@ export default function Routes(props) {
       </Route>
     </Switch>
   );
-  if (props.isAuth) {
-    routes = (
-      <React.Fragment>
-        <Route path="/weather">
-          <LocationListContainer />
-        </Route>
-
-        {/* Dinamic Routes for Forecast Extended */}
-        <ForecastRoutes />
-
-        {/* Dinamic Routes for User*/}
-        <UserRoutes />
-
-        <Redirect from="/" to="/weather" />
-        <Route path="*">
-          <h1>404</h1>
-        </Route>
-      </React.Fragment>
-    );
-  }
+  
 
   return routes;
 }
+
+const mapDistpatchToProps = dispatch => {
+  return({
+    setAuthState : (user)=>{ dispatch(actions.setAuthState(user))}
+  })
+}
+
+
+
+export default connect(null, mapDistpatchToProps)(Routes)
