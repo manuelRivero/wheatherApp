@@ -36,7 +36,7 @@ class WeatherList extends Component {
     const { cities, classes } = this.props;
     return (
       <React.Fragment>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={8}>
           <Paper className={classes.paper}>
             {cities.map((city, index) => (
               <WeatherItem
