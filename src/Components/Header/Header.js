@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import firebaseApp from "../../firebase/firebaseConfi";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -9,25 +12,25 @@ import {
   Typography,
   Button,
   Menu,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
-export default function Header() {
+function Header({ isAuth }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -35,10 +38,14 @@ export default function Header() {
     setAnchorEl(null);
   };
 
-  const comingSoon=()=>{
-    alert("Coming Soon")
+  const logOut = () => {
+    firebaseApp
+      .auth()
+      .signOut()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
     handleClose();
-  }
+  };
 
   const classes = useStyles();
 
@@ -53,7 +60,8 @@ export default function Header() {
             aria-controls="simple-menu"
             aria-haspopup="true"
             onClick={handleClick}
-            variant="contained" color="primary"
+            variant="contained"
+            color="primary"
           >
             Menu
           </Button>
@@ -64,12 +72,28 @@ export default function Header() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={comingSoon}>Profile</MenuItem>
-            <MenuItem onClick={comingSoon}>My account</MenuItem>
-            <MenuItem onClick={comingSoon}>Logout</MenuItem>
+            {isAuth ? (
+              <React.Fragment>
+                <MenuItem>
+                  <Link to="/user/profile">Profile</Link>
+                </MenuItem>
+                <MenuItem onClick={logOut}>Log Out</MenuItem>
+              </React.Fragment>
+            ) : (
+              <MenuItem >
+                <Link to="/user/login">Log in</Link>
+              </MenuItem>
+            )}
           </Menu>
         </Toolbar>
       </AppBar>
     </>
   );
 }
+
+const mapStateToProps = ({ userReducer }) => {
+  return {
+    isAuth: userReducer.user !== null,
+  };
+};
+export default connect(mapStateToProps, null)(Header);
