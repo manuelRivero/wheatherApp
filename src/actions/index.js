@@ -119,3 +119,18 @@ export const setAuthState = (user) => {
     payload:user
   }
 }
+
+export const hideSnackbar = () => {
+  return ({
+    type:actions.HIDE_SNACKBAR
+  })
+}
+
+export const showSnackbar = (message) => {
+  return ( dispatch => {
+    dispatch({type:actions.SHOW_SNACKBAR, payload:message})
+    setTimeout( ()=>{
+      dispatch(hideSnackbar())
+    }, 5000)
+  })
+}

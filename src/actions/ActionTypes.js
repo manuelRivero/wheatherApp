@@ -23,3 +23,8 @@ export const SEARCH_CITY_FAIL = "SEARCH_CITY_FAIL";
 // for auth
 
 export const SET_AUTH_STATE = "SET_AUTH_STATE"
+
+// notifications
+
+export const SHOW_SNACKBAR = "SHOW_SNACKBAR";
+export const HIDE_SNACKBAR = "HIDE_SNACKBAR"
