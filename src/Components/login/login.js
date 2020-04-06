@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => {
       backgroundColor:"#fef6dd",
       color:"#968754",
       borderRadius:"3px"
+    },
+    form:{
+      margin: "2rem 0"
+    },
+    btn:{
+      margin: "2rem 0"
     }
   };
 });
@@ -31,7 +37,7 @@ export default function Login() {
     password: { value: "" },
   });
 
-  const [error, setError] = useState("null");
+  const [error, setError] = useState(null);
 
   const inputChangedHanler = (e) => {
     let newInputValue = { ...form[e.target.name] };
@@ -52,8 +58,8 @@ export default function Login() {
   return (
     <Grid item xs={12} md={6}>
       <Paper className={classes.paper}>
-        <Typography>Log in</Typography>
-        <form onSubmit={submitHandler}>
+        <Typography variant="h4" >Log in</Typography>
+        <form onSubmit={submitHandler} className={classes.form}>
           <TextField
             autoFocus
             placeholder="example@example.com"
@@ -75,7 +81,7 @@ export default function Login() {
             onChange={inputChangedHanler}
             fullWidth
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button className={classes.btn} type="submit" variant="contained" color="primary">
             Log In!
           </Button>
         </form>
