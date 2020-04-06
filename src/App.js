@@ -11,6 +11,7 @@ import Container from "@material-ui/core/Container";
 import Header from "./Components/Header/Header";
 import "./App.css";
 import SnackbarContainer from "./Containers/snackbarContainer";
+import FooterContainer from "./Containers/footerContainer";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -35,6 +36,7 @@ export default (props) => {
             <SnackbarContainer />
           </Grid>
         </Container>
+        <FooterContainer />
       </div>
     </Router>
   );
