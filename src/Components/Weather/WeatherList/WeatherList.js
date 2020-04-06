@@ -7,6 +7,9 @@ import { withStyles } from "@material-ui/styles";
 
 const styles = theme => {
   return {
+    root:{
+      marginBottom: "150px"
+    },
     paper: {
       padding: "1rem",
       textAlign: "center"
@@ -36,7 +39,7 @@ class WeatherList extends Component {
     const { cities, classes } = this.props;
     return (
       <React.Fragment>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10} className={classes.root}>
           <Paper className={classes.paper}>
             {cities.map((city, index) => (
               <WeatherItem

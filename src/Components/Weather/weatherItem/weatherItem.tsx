@@ -55,7 +55,7 @@ class Weather extends Component<props, state> {
     const { data } = this.state;
     return (
       <Card
-        style={{ marginBottom: "1.5rem", cursor: "pointer" }}
+        style={{ margin: "1.5rem auto", cursor: "pointer", maxWidth:" 600px" }}
         onClick={this.headleClick}
       >
         <CardHeader

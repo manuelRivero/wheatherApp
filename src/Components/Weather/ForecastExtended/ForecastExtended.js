@@ -85,7 +85,7 @@ const ForecastExtended = ({ city, forecastExtendedData }) => {
   }
 
   return (
-    <Grid item sm={12} md={8}>
+    <Grid item sm={12} md={10}>
       <Paper className={classes.paper}>
         <div className={classes.actions}>
           <IconButton onClick={onBack}>
