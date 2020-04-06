@@ -1,6 +1,6 @@
 import React from "react";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import { Fab } from "@material-ui/core";
+import { Fab, Tooltip} from "@material-ui/core";
 
 
 export default function WeatherListController(props) {
@@ -10,9 +10,12 @@ export default function WeatherListController(props) {
   };
   return (
     <div className="">
-      <Fab color="primary" variant="extended" aria-label="add" onClick={clickHandler}>
+        <Tooltip title="Add new location!">
+          <Fab color="primary" variant="extended" aria-label="add" onClick={clickHandler}>
         <LocationOnIcon/> NEW
       </Fab>
+      </Tooltip>
+      
     </div>
   );
 }
